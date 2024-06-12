@@ -42,16 +42,21 @@ echo 12) Lijst van Alle Takken
 echo 13) Voeg Takken Samen
 echo 14) Verwijder Tak
 echo.
-echo lokaal concept opslaan
+echo lokaal concept
 echo.
 echo 15) concept opslaan
 echo 16) laad concept lokaal in
 echo.
-echo Overige functies
+echo git functies
 echo.
 echo 17) Login bij GitHub
-echo 18) Uitleg Functies
-echo 19) Sluit EasyGit
+echo 18) git versie
+echo.
+echo Overige Functies
+echo.
+echo 19) Uitleg Functies
+echo 20) Beheer EasyGit
+echo 21) Sluit EasyGit
 set /p choice="Optie: "
 
 if "%choice%"=="1" goto clone_repo
@@ -71,10 +76,22 @@ if "%choice%"=="14" goto delete_branch
 if "%choice%"=="15" goto stash_changes
 if "%choice%"=="16" goto apply_stash
 if "%choice%"=="17" goto login_github
-if "%choice%"=="18" goto explain_functions
-if "%choice%"=="19" goto exit
+if "%choice%"=="18" goto git_ver
+if "%choice%"=="19" goto explain_functions
+if "%choice%"=="20" goto beheer_easygit
+if "%choice%"=="21" goto exit
 echo Optie bestaat niet
 goto menumain
+
+:git_ver
+echo Git versie:
+git --version
+goto menumain
+
+:beheer_easygit
+echo EasyGit Versie 1
+goto menumain
+
 
 :auto_commit
 git pull origin main
@@ -141,7 +158,7 @@ echo Laatste wijzigingen opgehaald.
 goto menumain
 
 :show_history
-git log --oneline
+git log
 goto menumain
 
 :show_differences
@@ -149,8 +166,8 @@ git diff
 goto menumain
 
 :merge_branches
-set /p source_branch="Welke tak wilt u samenvoegen: "
-set /p target_branch="In welke tak wilt u samenvoegen: "
+set /p source_branch="Welke tak wil je samenvoegen: "
+set /p target_branch="In welke tak wil je samenvoegen: "
 git checkout %target_branch%
 git merge %source_branch%
 echo Tak '%source_branch%' is samengevoegd in '%target_branch%'.
@@ -158,9 +175,8 @@ goto menumain
 
 :delete_branch
 set /p branch_name="Welke tak wilt u verwijderen: "
-set /p remote="Wilt u de tak ook van de remote verwijderen (j/n): "
 git branch -d %branch_name%
-if /i "%remote%"=="j" git push origin --delete %branch_name%
+git push origin --delete %branch_name%
 echo Tak '%branch_name%' is verwijderd.
 goto menumain
 
