@@ -1,2 +1,2 @@
 # EasyGit
-Makes git commands easy
+Maakt git makkelijk 
