@@ -6,7 +6,7 @@ if %errorlevel% neq 0 (
     echo Git is niet geïnstalleerd op dit systeem.
     set /p install_git="Wilt je Git installeren? (j/n): "
     if /i "%install_git%"=="j" goto install_git
-    echo Git is vereist voor dit script. Sluiten...
+    echo Git is vereist voor dit script.
     pause
     exit /b
 )
